@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+    static ArrayList<Producto> productos = new ArrayList<>();
     public static void main(String[] args) {
-
         System.out.println("=== SISTEMA DE INVENTARIO - Comercializadora OliVanders ===");
         int opcion;
         do {
@@ -72,7 +73,7 @@ public class Main {
                 existencias = scanner.nextLine();
             } while (existencias.isEmpty());
 
-            Producto producto = new Producto(identificacion, nombre, serie, valor, proveedor, existencias);
+            productos.add(new Producto(identificacion, nombre, serie, valor, proveedor, existencias));
         }
     }
 }
