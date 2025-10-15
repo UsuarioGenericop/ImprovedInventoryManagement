@@ -23,7 +23,7 @@ public class Main {
             switch (opcion) {
                 case 1 -> registrarProducto();
                 case 2 -> mostrarProductos();
-//                case 3 -> mostrarExistencias();
+                case 3 -> mostrarExistencias();
 //                case 4 -> modificarProducto();
 //                case 5 -> eliminarProducto();
 //                case 6 -> registrarVenta();
@@ -85,4 +85,14 @@ public class Main {
             System.out.printf("%-15s %-20s %-15s %-10s %-20s\n",productos.get(i).returnId(), productos.get(i).returnNombre()
                     ,productos.get(i).returnSerie(),productos.get(i).returnValor(),productos.get(i).returnProveedor());
         }
-    }}
+    }
+    public static void mostrarExistencias() {
+        System.out.println("\n=== LISTADO COMPLETO DE EXISTENCIAS ===");
+        System.out.printf("%-20s %-15s %-10s\n", "Nombre del producto", "Identificación", "Cantidad");
+        System.out.println("-------------------------------------------------------------------------------");
+        for (int i = 0; i < cantidadProductos; i++) {
+            System.out.printf("%-20s %-15s %-10s\n",
+                    productos.get(i).returnNombre(), productos.get(i).returnId(), productos.get(i).returnExistencias());
+        }
+    }
+}
