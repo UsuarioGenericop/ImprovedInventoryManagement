@@ -35,10 +35,10 @@ public class Main {
     }
     public static void registrarProducto(){
         System.out.print("Ingrese la cantidad de productos a registrar: ");
-        cantidadProductos = scanner.nextInt();
+        int cantidadProductosIngreso = scanner.nextInt();
         scanner.nextLine();
-
-        for (int i = 0; i < cantidadProductos; i++) {
+        cantidadProductos += cantidadProductosIngreso;
+        for (int i = 0; i < cantidadProductosIngreso; i++) {
 
             String id;
             do {
