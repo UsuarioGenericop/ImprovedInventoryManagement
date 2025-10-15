@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Producto> productos = new ArrayList<>();
+    static int cantidadProductos;
     public static void main(String[] args) {
         System.out.println("=== SISTEMA DE INVENTARIO - Comercializadora OliVanders ===");
         int opcion;
@@ -21,7 +22,7 @@ public class Main {
 
             switch (opcion) {
                 case 1 -> registrarProducto();
-//                case 2 -> mostrarProductos();
+                case 2 -> mostrarProductos();
 //                case 3 -> mostrarExistencias();
 //                case 4 -> modificarProducto();
 //                case 5 -> eliminarProducto();
@@ -34,16 +35,16 @@ public class Main {
     }
     public static void registrarProducto(){
         System.out.print("Ingrese la cantidad de productos a registrar: ");
-        int cantidadProductos = scanner.nextInt();
+        cantidadProductos = scanner.nextInt();
         scanner.nextLine();
 
         for (int i = 0; i < cantidadProductos; i++) {
 
-            String identificacion;
+            String id;
             do {
                 System.out.print("Numero de identificacion del producto " + (i + 1) + " : ");
-                identificacion = scanner.nextLine().trim();
-            } while (identificacion.isEmpty());
+                id = scanner.nextLine().trim();
+            } while (id.isEmpty());
 
             String nombre;
             do {
@@ -73,7 +74,15 @@ public class Main {
                 existencias = scanner.nextLine();
             } while (existencias.isEmpty());
 
-            productos.add(new Producto(identificacion, nombre, serie, valor, proveedor, existencias));
+            productos.add(new Producto(id, nombre, serie, valor, proveedor, existencias));
         }
     }
-}
+    public static void mostrarProductos() {
+        System.out.println("\n=== LISTADO COMPLETO DE PRODUCTOS ===");
+        System.out.printf("%-15s %-20s %-15s %-10s %-20s\n", "ID", "Nombre", "Serie", "Valor", "Proveedor");
+        System.out.println("-------------------------------------------------------------------------------");
+        for (int i = 0; i < cantidadProductos; i++) {
+            System.out.printf("%-15s %-20s %-15s %-10s %-20s\n",productos.get(i).returnId(), productos.get(i).returnNombre()
+                    ,productos.get(i).returnSerie(),productos.get(i).returnValor(),productos.get(i).returnProveedor());
+        }
+    }}
