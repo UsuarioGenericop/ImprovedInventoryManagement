@@ -42,35 +42,35 @@ public class Main {
 
             String id;
             do {
-                System.out.print("Numero de identificacion del producto " + (i + 1) + " : ");
+                System.out.print("Numero de identificacion del producto " + (i + 1) + " a ingresar: ");
                 id = scanner.nextLine().trim();
             } while (id.isEmpty());
 
             String nombre;
             do {
-                System.out.print("Nombre del producto " + (i + 1) + " : ");
+                System.out.print("Nombre del producto " + (i + 1) + " a ingresar: ");
                 nombre = scanner.nextLine().trim();
             } while (nombre.isEmpty());
 
             String serie;
-            System.out.print("Numero de serie del producto " + (i + 1) + " (opcional) : ");
+            System.out.print("Numero de serie del producto " + (i + 1) + " a ingresar (opcional): ");
             serie = scanner.nextLine().trim();
 
             String valor;
             do {
-                System.out.print("Valor del producto " + (i + 1) + " : ");
+                System.out.print("Valor del producto " + (i + 1) + " a ingresar: ");
                 valor = scanner.nextLine().trim();
             } while (valor.isEmpty());
 
             String proveedor;
             do {
-                System.out.print("Nombre del proveedor del producto " + (i + 1) + " : ");
+                System.out.print("Nombre del proveedor del producto " + (i + 1) + " a ingresar: ");
                 proveedor = scanner.nextLine().trim();
             } while (proveedor.isEmpty());
 
             String existencias;
             do {
-                System.out.print("Existencias del producto " + (i + 1) + " : ");
+                System.out.print("Existencias del producto " + (i + 1) + " a ingresar: ");
                 existencias = scanner.nextLine();
             } while (existencias.isEmpty());
 
