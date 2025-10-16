@@ -11,7 +11,7 @@ public class Main {
         System.out.println("=== SISTEMA DE INVENTARIO - Comercializadora OliVanders ===");
         int opcion;
         do {
-            System.out.println("1. Registrar producto");
+            System.out.println("\n1. Registrar producto");
             System.out.println("2. Mostrar productos");
             System.out.println("3. Mostrar existencias");
             System.out.println("4. Modificar producto");
@@ -37,6 +37,7 @@ public class Main {
     }
 
     public static void registrarProducto() {
+        System.out.println("\n=== REGISTRAR PRODUCTOS ===");
         System.out.print("Ingrese la cantidad de productos a registrar: ");
         int cantidadProductosIngreso = scanner.nextInt();
         scanner.nextLine();
@@ -48,14 +49,15 @@ public class Main {
                 System.out.print("Numero de identificacion del producto " + (i + 1) + " a ingresar: ");
                 id = scanner.nextLine().trim();
                 for (Producto producto : productos) {
-                    if (Objects.equals(producto.id, id)) {
-
-                        do {
-                            System.out.println("Un producto con este ID ya ha sido registrado");
-                            System.out.print("Numero de identificacion del producto " + (i + 1) + " a ingresar: ");
-                            id = scanner.nextLine().trim();
-                        } while (Objects.equals(producto.id, id));
-                    }
+                    do {
+                        for (Producto producto2 : productos) {
+                            if (Objects.equals(producto2.id, id)) {
+                                System.out.println("Un producto con este ID ya ha sido registrado");
+                                System.out.print("Numero de identificacion del producto " + (i + 1) + " a ingresar: ");
+                                id = scanner.nextLine().trim();
+                            }
+                        }
+                    } while (Objects.equals(producto.id, id));
                 }
             } while (id.isEmpty());
 
@@ -110,4 +112,6 @@ public class Main {
                     productos.get(i).returnNombre(), productos.get(i).returnId(), productos.get(i).returnExistencias());
         }
     }
+
+
 }
