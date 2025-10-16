@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Producto> productos = new ArrayList<>();
     static int cantidadProductos;
+
     public static void main(String[] args) {
         System.out.println("=== SISTEMA DE INVENTARIO - Comercializadora OliVanders ===");
         int opcion;
@@ -33,7 +35,8 @@ public class Main {
             }
         } while (opcion != 8);
     }
-    public static void registrarProducto(){
+
+    public static void registrarProducto() {
         System.out.print("Ingrese la cantidad de productos a registrar: ");
         int cantidadProductosIngreso = scanner.nextInt();
         scanner.nextLine();
@@ -44,6 +47,16 @@ public class Main {
             do {
                 System.out.print("Numero de identificacion del producto " + (i + 1) + " a ingresar: ");
                 id = scanner.nextLine().trim();
+                for (Producto producto : productos) {
+                    if (Objects.equals(producto.id, id)) {
+
+                        do {
+                            System.out.println("Un producto con este ID ya ha sido registrado");
+                            System.out.print("Numero de identificacion del producto " + (i + 1) + " a ingresar: ");
+                            id = scanner.nextLine().trim();
+                        } while (Objects.equals(producto.id, id));
+                    }
+                }
             } while (id.isEmpty());
 
             String nombre;
@@ -77,15 +90,17 @@ public class Main {
             productos.add(new Producto(id, nombre, serie, valor, proveedor, existencias));
         }
     }
+
     public static void mostrarProductos() {
         System.out.println("\n=== LISTADO COMPLETO DE PRODUCTOS ===");
         System.out.printf("%-15s %-20s %-15s %-10s %-20s\n", "ID", "Nombre", "Serie", "Valor", "Proveedor");
         System.out.println("-------------------------------------------------------------------------------");
         for (int i = 0; i < cantidadProductos; i++) {
-            System.out.printf("%-15s %-20s %-15s %-10s %-20s\n",productos.get(i).returnId(), productos.get(i).returnNombre()
-                    ,productos.get(i).returnSerie(),productos.get(i).returnValor(),productos.get(i).returnProveedor());
+            System.out.printf("%-15s %-20s %-15s %-10s %-20s\n", productos.get(i).returnId(), productos.get(i).returnNombre()
+                    , productos.get(i).returnSerie(), productos.get(i).returnValor(), productos.get(i).returnProveedor());
         }
     }
+
     public static void mostrarExistencias() {
         System.out.println("\n=== LISTADO COMPLETO DE EXISTENCIAS ===");
         System.out.printf("%-20s %-15s %-10s\n", "Nombre del producto", "Identificación", "Cantidad");
