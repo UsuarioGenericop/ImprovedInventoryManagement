@@ -27,7 +27,7 @@ public class Main {
                 case 2 -> mostrarProductos();
                 case 3 -> mostrarExistencias();
                 case 4 -> modificarProducto();
-//                case 5 -> eliminarProducto();
+                case 5 -> eliminarProducto();
 //                case 6 -> registrarVenta();
 //                case 7 -> mostrarVentas();
                 case 8 -> System.out.println("Saliendo del sistema...");
@@ -175,6 +175,20 @@ public class Main {
                 producto.existencias = existencias;
 
                 System.out.println("Producto modificado correctamente.");
+                return;
+            }
+        }
+        System.out.println("Producto no encontrado.");
+    }
+    public static void eliminarProducto(){
+        System.out.println("\n=== ELIMINAR PRODUCTOS ===");
+        System.out.print("Ingrese el ID del producto que desea eliminar: ");
+        String id = scanner.nextLine();
+        for (Producto producto : productos) {
+            if (Objects.equals(producto.id, id)) {
+                productos.remove(producto);
+                System.out.println("Producto eliminado correctamente.");
+                cantidadProductos--;
                 return;
             }
         }
