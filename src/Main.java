@@ -173,8 +173,12 @@ public class Main {
                 producto.valor = valor;
                 producto.proveedor = proveedor;
                 producto.existencias = existencias;
+
+                System.out.println("Producto modificado correctamente.");
+                return;
             }
         }
+        System.out.println("Producto no encontrado.");
     }
 
 }
