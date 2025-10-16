@@ -26,7 +26,7 @@ public class Main {
                 case 1 -> registrarProducto();
                 case 2 -> mostrarProductos();
                 case 3 -> mostrarExistencias();
-//                case 4 -> modificarProducto();
+                case 4 -> modificarProducto();
 //                case 5 -> eliminarProducto();
 //                case 6 -> registrarVenta();
 //                case 7 -> mostrarVentas();
@@ -112,6 +112,69 @@ public class Main {
                     productos.get(i).returnNombre(), productos.get(i).returnId(), productos.get(i).returnExistencias());
         }
     }
+    public static void modificarProducto() {
+        System.out.println("\n=== MODIFICAR PRODUCTOS ===");
+        System.out.print("Ingrese el ID del producto que desea modificar: ");
+        String id = scanner.nextLine();
+        for (Producto producto : productos) {
+            if (Objects.equals(producto.id, id)) {
 
+                String newId;
+                do {
+                    System.out.print("Nuevo numero de identificacion del producto " + id + " a ingresar: ");
+                    newId = scanner.nextLine().trim();
+                    if (!newId.equals(id)) {
+                        for (Producto producto2 : productos) {
+                            do {
+                                for (Producto producto3 : productos) {
+                                    if (Objects.equals(producto3.id, newId)) {
+                                        System.out.println("Un producto con este ID ya ha sido registrado");
+                                        System.out.print("Nuevo numero de identificacion del producto " + id + " : ");
+                                        newId = scanner.nextLine().trim();
+                                    }
+                                }
+                            } while (Objects.equals(producto2.id, newId));
+                        }
+                    }else{System.out.println("Se mantuvo el antiguo id");}
+                } while (newId.isEmpty());
+
+
+                String nombre;
+                do {
+                    System.out.print("Nuevo nombre del producto " + id + " : ");
+                    nombre = scanner.nextLine().trim();
+                } while (nombre.isEmpty());
+
+                String serie;
+                System.out.print("Nuevo numero de serie del producto " + id + " (opcional): ");
+                serie = scanner.nextLine().trim();
+
+                String valor;
+                do {
+                    System.out.print("Nuevo valor del producto " + id + " : ");
+                    valor = scanner.nextLine().trim();
+                } while (valor.isEmpty());
+
+                String proveedor;
+                do {
+                    System.out.print("Nuevo nombre del proveedor del producto " + id + " : ");
+                    proveedor = scanner.nextLine().trim();
+                } while (proveedor.isEmpty());
+
+                String existencias;
+                do {
+                    System.out.print("Nuevas existencias del producto " + id + " : ");
+                    existencias = scanner.nextLine();
+                } while (existencias.isEmpty());
+
+                producto.id = newId;
+                producto.nombre = nombre;
+                producto.serie = serie;
+                producto.valor = valor;
+                producto.proveedor = proveedor;
+                producto.existencias = existencias;
+            }
+        }
+    }
 
 }
