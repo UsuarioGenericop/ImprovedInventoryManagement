@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Producto> productos = new ArrayList<>();
+    static ArrayList<Venta> ventas = new ArrayList<>();
     static int cantidadProductos;
 
     public static void main(String[] args) {
@@ -28,7 +29,7 @@ public class Main {
                 case 3 -> mostrarExistencias();
                 case 4 -> modificarProducto();
                 case 5 -> eliminarProducto();
-//                case 6 -> registrarVenta();
+                case 6 -> registrarVenta();
 //                case 7 -> mostrarVentas();
                 case 8 -> System.out.println("Saliendo del sistema...");
                 default -> System.out.println("Opción inválida.");
@@ -194,5 +195,30 @@ public class Main {
         }
         System.out.println("Producto no encontrado.");
     }
+    public static void registrarVenta(){
+        System.out.println("\n=== REGISTRAR VENTAS ===");
+        System.out.print("Ingrese la cantidad de productos a vender: ");
+        String cantidadProductosVenta = scanner.nextLine();
+        scanner.nextLine();
+        for (int i = 0; i < Integer.parseInt(cantidadProductosVenta.trim()); i++) {
+            System.out.print("Ingrese el ID del producto " + (i + 1) + " que desea vender: ");
+            String id = scanner.nextLine();
+            for (Producto producto : productos) {
+                if (Objects.equals(producto.id, id)) {
+                    System.out.print("Ingrese la cantidad del producto " + producto.nombre +  " que desea vender: ");
+                    String cantidadVenta = scanner.nextLine();
+                        if (Integer.parseInt(cantidadVenta.trim()) > Integer.parseInt(producto.existencias.trim())){
+                            System.out.print("No hay sufucientes existencias del producto " + producto.nombre + " para vender: ");
+                        }else {
+                            int newExistencias = Integer.parseInt(producto.existencias.trim()) - Integer.parseInt(cantidadVenta.trim());
+                            producto.existencias = String.valueOf(newExistencias);
+                        }
+                    return;
+                }
+
+            }System.out.println("Producto no encontrado.");
+        }
+    }
+
 
 }
