@@ -6,7 +6,7 @@ public class Venta {
     ArrayList<Producto> productosVendidosDetalle;
     String valorTotal;
 
-    public Venta(int numeroFactura, ArrayList<String> productosVendidos, String valorTotal , ArrayList<Producto> productosVendidosDetalle) {
+    public Venta(int numeroFactura, ArrayList<String> productosVendidos, String valorTotal, ArrayList<Producto> productosVendidosDetalle) {
         this.numeroFactura = numeroFactura;
         this.productosVendidos = productosVendidos;
         this.valorTotal = valorTotal;

@@ -114,6 +114,7 @@ public class Main {
                     productos.get(i).returnNombre(), productos.get(i).returnId(), productos.get(i).returnExistencias());
         }
     }
+
     public static void modificarProducto() {
         System.out.println("\n=== MODIFICAR PRODUCTOS ===");
         System.out.print("Ingrese el ID del producto que desea modificar: ");
@@ -137,7 +138,9 @@ public class Main {
                                 }
                             } while (Objects.equals(producto2.id, newId));
                         }
-                    }else{System.out.println("Se mantuvo el antiguo id");}
+                    } else {
+                        System.out.println("Se mantuvo el antiguo id");
+                    }
                 } while (newId.isEmpty());
 
 
@@ -176,57 +179,60 @@ public class Main {
                 producto.proveedor = proveedor;
                 producto.existencias = existencias;
 
-                System.out.println("Producto modificado correctamente.");
+                System.out.println("Producto modificado correctamente");
                 return;
             }
         }
         System.out.println("Producto no encontrado.");
     }
-    public static void eliminarProducto(){
+
+    public static void eliminarProducto() {
         System.out.println("\n=== ELIMINAR PRODUCTOS ===");
         System.out.print("Ingrese el ID del producto que desea eliminar: ");
         String id = scanner.nextLine();
         for (Producto producto : productos) {
             if (Objects.equals(producto.id, id)) {
                 productos.remove(producto);
-                System.out.println("Producto eliminado correctamente.");
+                System.out.println("Producto eliminado correctamente");
                 cantidadProductos--;
                 return;
             }
         }
-        System.out.println("Producto no encontrado.");
+        System.out.println("Producto no encontrado");
     }
-    public static void registrarVenta(){
+
+    public static void registrarVenta() {
         ArrayList<String> productosVendidos = new ArrayList<>();
         ArrayList<Producto> productosVendidosDetalle = new ArrayList<>();
+        int totalVenta = 0;
         System.out.println("\n=== REGISTRAR VENTAS ===");
         System.out.print("Ingrese la cantidad de productos a vender: ");
         String cantidadProductosVenta = scanner.nextLine();
-        scanner.nextLine();
         for (int i = 0; i < Integer.parseInt(cantidadProductosVenta.trim()); i++) {
             System.out.print("Ingrese el ID del producto " + (i + 1) + " que desea vender: ");
             String id = scanner.nextLine();
             for (Producto producto : productos) {
                 if (Objects.equals(producto.id, id)) {
-                    System.out.print("Ingrese la cantidad del producto " + producto.nombre +  " que desea vender: ");
+                    System.out.print("Ingrese la cantidad del producto " + producto.nombre + " que desea vender: ");
                     String cantidadVenta = scanner.nextLine();
-                        if (Integer.parseInt(cantidadVenta.trim()) > Integer.parseInt(producto.existencias.trim())){
-                            System.out.print("No hay sufucientes existencias del producto " + producto.nombre + " para vender: ");
-                        }else {
-                            int newExistencias = Integer.parseInt(producto.existencias.trim()) - Integer.parseInt(cantidadVenta.trim());
-                            producto.existencias = String.valueOf(newExistencias);
-                            int total = Integer.parseInt(cantidadVenta.trim()) * Integer.parseInt(producto.valor.trim());
-                            productosVendidos.add(producto.nombre);
-                            productosVendidosDetalle.add(producto);
-                            ventas.add(new Venta(contadorFactura, productosVendidos, String.valueOf(total), productosVendidosDetalle));
-                            contadorFactura++;
-                        }
-                    return;
+                    if (Integer.parseInt(cantidadVenta.trim()) > Integer.parseInt(producto.existencias.trim())) {
+                        System.out.print("No hay sufucientes existencias del producto " + producto.nombre + " para vender: ");
+                    } else {
+                        int newExistencias = Integer.parseInt(producto.existencias.trim()) - Integer.parseInt(cantidadVenta.trim());
+                        producto.existencias = String.valueOf(newExistencias);
+                        int total = Integer.parseInt(cantidadVenta.trim()) * Integer.parseInt(producto.valor.trim());
+                        totalVenta += total;
+                        productosVendidos.add(producto.nombre);
+                        productosVendidosDetalle.add(producto);
+                        ventas.add(new Venta(contadorFactura, productosVendidos, String.valueOf(totalVenta), productosVendidosDetalle));
+                        contadorFactura++;
+                        System.out.println("Venta registrada con exito");
+                    }
                 }
+            }
+        }
 
-            }System.out.println("Producto no encontrado.");
         }
     }
 
 
-}
