@@ -7,6 +7,7 @@ public class Main {
     static ArrayList<Producto> productos = new ArrayList<>();
     static ArrayList<Venta> ventas = new ArrayList<>();
     static int cantidadProductos;
+    static int contadorFactura = 1;
 
     public static void main(String[] args) {
         System.out.println("=== SISTEMA DE INVENTARIO - Comercializadora OliVanders ===");
@@ -196,6 +197,8 @@ public class Main {
         System.out.println("Producto no encontrado.");
     }
     public static void registrarVenta(){
+        ArrayList<String> productosVendidos = new ArrayList<>();
+        ArrayList<Producto> productosVendidosDetalle = new ArrayList<>();
         System.out.println("\n=== REGISTRAR VENTAS ===");
         System.out.print("Ingrese la cantidad de productos a vender: ");
         String cantidadProductosVenta = scanner.nextLine();
@@ -212,6 +215,11 @@ public class Main {
                         }else {
                             int newExistencias = Integer.parseInt(producto.existencias.trim()) - Integer.parseInt(cantidadVenta.trim());
                             producto.existencias = String.valueOf(newExistencias);
+                            int total = Integer.parseInt(cantidadVenta.trim()) * Integer.parseInt(producto.valor.trim());
+                            productosVendidos.add(producto.nombre);
+                            productosVendidosDetalle.add(producto);
+                            ventas.add(new Venta(contadorFactura, productosVendidos, String.valueOf(total), productosVendidosDetalle));
+                            contadorFactura++;
                         }
                     return;
                 }
