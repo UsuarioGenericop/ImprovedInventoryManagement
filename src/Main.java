@@ -31,7 +31,7 @@ public class Main {
                 case 4 -> modificarProducto();
                 case 5 -> eliminarProducto();
                 case 6 -> registrarVenta();
-//                case 7 -> mostrarVentas();
+                case 7 -> mostrarVentas();
                 case 8 -> System.out.println("Saliendo del sistema...");
                 default -> System.out.println("Opción inválida.");
             }
@@ -202,7 +202,7 @@ public class Main {
     }
 
     public static void registrarVenta() {
-        ArrayList<String> productosVendidos = new ArrayList<>();
+        ArrayList<String> cantidadVendidaProducto = new ArrayList<>();
         ArrayList<Producto> productosVendidosDetalle = new ArrayList<>();
         int totalVenta = 0;
         System.out.println("\n=== REGISTRAR VENTAS ===");
@@ -222,17 +222,28 @@ public class Main {
                         producto.existencias = String.valueOf(newExistencias);
                         int total = Integer.parseInt(cantidadVenta.trim()) * Integer.parseInt(producto.valor.trim());
                         totalVenta += total;
-                        productosVendidos.add(producto.nombre);
+                        cantidadVendidaProducto.add(String.valueOf(newExistencias));
                         productosVendidosDetalle.add(producto);
-                        ventas.add(new Venta(contadorFactura, productosVendidos, String.valueOf(totalVenta), productosVendidosDetalle));
-                        contadorFactura++;
                         System.out.println("Venta registrada con exito");
                     }
                 }
             }
         }
+        ventas.add(new Venta(contadorFactura, String.valueOf(totalVenta), productosVendidosDetalle, cantidadVendidaProducto));
+        contadorFactura++;
 
-        }
+    }
+    static void mostrarVentas() {
+        System.out.println("\n=== MOSTRAR VENTAS ===");
+        System.out.printf("%-20s %-15s %-10s\n", "N° Factura", "Productos", "Total Venta");
+        System.out.println("-------------------------------------------------------------------------------");
+        for (Venta venta : ventas) {
+            StringBuilder lista = new StringBuilder();
+
+            for (Producto producto : venta.productosVendidosDetalle) {
+                lista.append(producto.nombre).append("(").append(venta.cantidadVendidaProducto).append(") ");
+            }
+            System.out.printf("%-20s %-15s %-10s\n", venta.numeroFactura, lista, venta.valorTotal);}}
     }
 
 
