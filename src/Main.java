@@ -240,8 +240,8 @@ public class Main {
         for (Venta venta : ventas) {
             StringBuilder lista = new StringBuilder();
 
-            for (Producto producto : venta.productosVendidosDetalle) {
-                lista.append(producto.nombre).append("(").append(venta.cantidadVendidaProducto).append(") ");
+            for (int i = 0; i < venta.productosVendidosDetalle.size() ; i++) {
+                    lista.append(venta.productosVendidosDetalle.get(i).nombre).append("(").append(venta.cantidadVendidaProducto.get(i)).append(") ");
             }
             System.out.printf("%-20s %-15s %-10s\n", venta.numeroFactura, lista, venta.valorTotal);}}
     }
