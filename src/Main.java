@@ -245,5 +245,5 @@ public class Main {
             }
             System.out.printf("%-20s %-15s %-10s\n", venta.numeroFactura, lista, venta.valorTotal);}}
     }
-
+//El codigo se puede optimizar y este mismo puede tener mas funciones como la de una tecla de retorno al menu principal
 
